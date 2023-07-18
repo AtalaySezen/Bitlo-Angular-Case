@@ -1,0 +1,17 @@
+table {
+    width: 100%;
+    max-width: 1550px;
+    margin: 2rem auto;
+}
+.container-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    height: 100%;
+}
+.warn-message {
+    font-size: 1.3rem;
+    font-weight: 550;
+}

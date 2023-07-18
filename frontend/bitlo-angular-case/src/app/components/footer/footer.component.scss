@@ -1,0 +1,23 @@
+footer {
+    flex-shrink: 0;
+    flex-grow: 0;
+    background: #0a2363;
+    padding: 0px 15px;
+}
+
+.header-footer {
+    color: #ffffff;
+    font-weight: 500;
+    user-select: none;
+}
+.footer-nav {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}

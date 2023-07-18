@@ -1,1 +1,39 @@
-<p>login works!</p>
+<section class="login-container">
+    <div class="login-content">
+        <div>
+            <h2 class="header-login">Bitlo</h2>
+            <p class="login-error" *ngIf="userErrorMessage">{{errorMessage}}</p>
+        </div>
+        <form [formGroup]="form">
+            <div class="example-container">
+                <mat-form-field>
+                    <mat-label>E-Posta</mat-label>
+                    <input formControlName="email" matInput type="text">
+                    <mat-error>{{getErrorMessage()}}</mat-error>
+
+                </mat-form-field>
+            </div>
+            <div class="example-container">
+                <mat-form-field>
+                    <mat-label>Şifre</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="this.form.get('password')?.invalid">Lütfen gerekli alanları doldurunuz</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="btn-group">
+                <button (click)="userLogin()" [disabled]="form.invalid" mat-raised-button color="primary">Giriş
+                    Yap</button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</section>

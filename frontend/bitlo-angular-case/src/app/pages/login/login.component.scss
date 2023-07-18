@@ -1,0 +1,48 @@
+.example-container {
+    margin-left: 8px;
+    width: 100%;
+    min-width: 270px;
+}
+
+.example-right-align {
+    text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.example-right-align {
+    -moz-appearance: textfield;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.login-content {
+    max-width: 1440px;
+}
+mat-form-field {
+    width: 100%;
+}
+.btn-group {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.header-login {
+    text-align: center;
+    color: #0a2363;
+}
+
+.login-error {
+    text-align: center;
+    color: red;
+    font-weight: 500;
+}
