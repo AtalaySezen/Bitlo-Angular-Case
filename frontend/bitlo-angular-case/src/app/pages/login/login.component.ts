@@ -22,6 +22,12 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
+    if (Object.keys(this.authService.tokenValue).length !== 0) {
+      this.router.navigate(['/profil'])
+    } else {
+      return;
+    }
+
 
   }
 

@@ -2,24 +2,17 @@
 <div class="loader" *ngIf="loader">
     <app-loader></app-loader>
 </div>
-<section class="container" *ngIf="!loader">
-    <div>
-        <div>
-            <h2>Marketler</h2>
-        </div>
+<section class="container">
+    <div *ngIf="!loader" class="search-area">
         <div class="search-container">
-            <mat-icon aria-hidden="false" class="icon-search" aria-label="Example home icon"
-                fontIcon="search"></mat-icon>
-            <input (keyup)="applyFilter($event)" class="search-input" type="search" #input>
+            <div>
+                <h2 class="markets-header">Marketler</h2>
+            </div>
+            <input (keyup)="applyFilter($event)" [(ngModel)]="input" class="search-input" type="search">
         </div>
     </div>
-    <div class="container-table">
+    <div class="container-table" *ngIf="!loader">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #firstSort="matSort">
-            <!-- <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
-                <td (click)="goMarketDetail(element)" mat-cell *matCellDef="let element"> {{element[column]}} </td>
-            </ng-container> -->
-
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef> index </th>
                 <td mat-cell *matCellDef="let element"> {{element.index}} </td>
@@ -33,56 +26,59 @@
 
             <ng-container matColumnDef="notionalVolume24h">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> notionalVolume24h </th>
-                <td mat-cell *matCellDef="let element"> {{element.notionalVolume24h|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.notionalVolume24h|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="volume24h">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> volume24h </th>
-                <td mat-cell *matCellDef="let element"> {{element.volume24h|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.volume24h|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="weightedAverage24h">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> weightedAverage24h </th>
-                <td mat-cell *matCellDef="let element"> {{element.weightedAverage24h|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.weightedAverage24h|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="lowestQuote24h">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> lowestQuote24h </th>
-                <td mat-cell *matCellDef="let element"> {{element.lowestQuote24h|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.lowestQuote24h|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="highestQuote24h">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> highestQuote24h </th>
-                <td mat-cell *matCellDef="let element"> {{element.highestQuote24h|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.highestQuote24h|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="currentQuote">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> currentQuote </th>
-                <td mat-cell *matCellDef="let element"> {{element.currentQuote|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.currentQuote|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="change24hPercent">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> change24hPercent </th>
                 <td mat-cell *matCellDef="let element"
                     [ngClass]="{'red': element.change24hPercent < 0, 'green': element.change24hPercent > 0, 'black': element.change24hPercent === 0}">
-                    %{{element.change24hPercent|number: '1.0-0'}} </td>
+                    %{{element.change24hPercent|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="change24h">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> change24h </th>
-                <td mat-cell *matCellDef="let element"> {{element.change24h|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.change24h|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="bid">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> bid </th>
-                <td mat-cell *matCellDef="let element"> {{element.bid|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.bid|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="ask">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> ask </th>
-                <td mat-cell *matCellDef="let element"> {{element.ask|number: '1.0-0'}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.ask|number: '1.2-2'}} </td>
             </ng-container>
-
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4" translate><span translate> <span>"{{input}}"</span>
+                        Aramanız ile eşleşen sonuç bulunamadı</span></td>
+            </tr>
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
@@ -91,6 +87,17 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of datas" class="sticky left-0">
     </mat-paginator>
 
+    <div class="list-container">
+        <ul>
+            <li>{{positiveChangeResult}}</li>
+            <li>{{mostIncreasedMarket}}</li>
+            <li>{{mostDecreasedMarket}}</li>
+            <li>{{numberOfMarketsAbove10000}}</li>
+            <li>{{numberOfMarketsUnder1TRY}}</li>
+            <li>{{averagePrice}}</li>
+            <li>{{btcToDolarResult}} <span>burası kontrol edilecek.</span></li>
+        </ul>
+    </div>
 
 </section>
 <app-footer></app-footer>

@@ -25,6 +25,8 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 
         if (
             !request.url.includes('auth/login')
+            &&!request.url.includes('markets')
+
             // && !request.url.includes('Auth/forgotPassword')
             // && !request.url.includes('Auth/verifyForgotPasswordToken')
             // && !request.url.includes('Auth/changePasswordWithToken')

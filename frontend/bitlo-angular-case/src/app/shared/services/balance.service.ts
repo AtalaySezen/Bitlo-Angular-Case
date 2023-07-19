@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { MarketData } from '../models/markets.model';
+import { balanceModel } from '../models/balance.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MarketService {
+export class BalanceService {
 
   constructor(private http: HttpClient) { }
 
-  GetProfileInformations() {
-    return this.http.get<MarketData[]>(environment.apiUrl + 'markets');
+  GetBalanceInformation() {
+    return this.http.post<any[]>(environment.apiUrl + 'auth/balances', {});
   }
 
 }

@@ -3,6 +3,10 @@ table {
     max-width: 1550px;
     margin: 2rem auto;
 }
+td {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
 .container-profile {
     display: flex;
     flex-direction: column;
@@ -14,4 +18,8 @@ table {
 .warn-message {
     font-size: 1.3rem;
     font-weight: 550;
+}
+.table-container {
+    width: 100%;
+    overflow: auto;
 }

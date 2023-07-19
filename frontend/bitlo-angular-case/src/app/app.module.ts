@@ -9,7 +9,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MarketsComponent } from './pages/markets/markets.component';
-import { MarketdetailComponent } from './pages/marketdetail/marketdetail.component';
 import { BalanceComponent } from './pages/balance/balance.component';
 import { OpentransactionsComponent } from './pages/opentransactions/opentransactions.component';
 import { LogoutComponent } from './pages/logout/logout.component';
@@ -20,13 +19,14 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiPrefixInterceptor } from './shared/http/interceptor';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { PhoneFormatPipe } from './shared/pipes/phone-format.pipe';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,6 @@ import {MatSortModule} from '@angular/material/sort';
     FooterComponent,
     LoginComponent,
     MarketsComponent,
-    MarketdetailComponent,
     BalanceComponent,
     OpentransactionsComponent,
     LogoutComponent,
@@ -46,6 +45,7 @@ import {MatSortModule} from '@angular/material/sort';
   imports: [
     BrowserModule,
     MatTableModule,
+    FormsModule,
     MatPaginatorModule,
     LoaderComponent,
     MatFormFieldModule,
@@ -55,6 +55,7 @@ import {MatSortModule} from '@angular/material/sort';
     ReactiveFormsModule,
     MatIconModule,
     AppRoutingModule,
+    MatCheckboxModule,
     HttpClientModule,
     MatInputModule,
     BrowserAnimationsModule,
