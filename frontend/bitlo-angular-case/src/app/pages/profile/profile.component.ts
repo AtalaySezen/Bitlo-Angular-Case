@@ -16,30 +16,28 @@ export class ProfileComponent {
   displayedColumns: string[] = ['createdBy', 'from', 'to'];
 
   constructor(private profileService: ProfileService, private authService: AuthService) {
-    if (Object.keys(this.authService.tokenValue).length !== 0) {
-      this.checkUserLogged = true;
-    } else {
-      this.checkUserLogged = false;
-    }
-  }
-
-  ngOnInit() {
-
+    this.checkUserLogged = Object.keys(this.authService.tokenValue).length !== 0;
     this.getProfileData();
   }
+
 
   getProfileData() {
     this.loader = true;
     this.profileService.GetProfileInformations().subscribe((data: ProfileResponse) => {
-      this.profileData = data.me;
-      console.log(this.profileData)
-      this.loader = false;
+      if (data.message = 'Auth success') {
+        this.profileData = data.me;
+        this.loader = false;
+      } else {
+        this.loader = false;
+      }
     },
       err => {
-        console.log(err);
+        console.log('Bir hata oluştu:', err);
         this.loader = false;
       })
   }
+
+
 
 
 }

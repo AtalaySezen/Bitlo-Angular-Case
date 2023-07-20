@@ -10,7 +10,6 @@
                     <mat-label>E-Posta</mat-label>
                     <input formControlName="email" matInput type="text">
                     <mat-error>{{getErrorMessage()}}</mat-error>
-
                 </mat-form-field>
             </div>
             <div class="example-container">
@@ -28,12 +27,6 @@
                 <button (click)="userLogin()" [disabled]="form.invalid" mat-raised-button color="primary">Giriş
                     Yap</button>
             </div>
-
-
         </form>
-
-
     </div>
-
-
 </section>

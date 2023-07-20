@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) { }
-  private authLocalStorageToken = `${environment.appName}-${environment.USERDATA_KEY}`;
+  private authLocalStorageToken = `${environment.appName}-${environment.token}`;
 
 
   Login(identifier: string, password: string) {
@@ -20,11 +20,12 @@ export class AuthService {
     })
   }
 
-  SetStorageUser(user: any) {
-    return localStorage.setItem(`${this.authLocalStorageToken}`, JSON.stringify(user));
+  SetStorageUser(token: any) {
+    return localStorage.setItem(`${this.authLocalStorageToken}`, JSON.stringify(token));
   }
 
   Logout() {
+
     localStorage.removeItem(`${this.authLocalStorageToken}`);
     this.router.navigate(['login']);
   }

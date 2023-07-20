@@ -10,20 +10,10 @@ export class HeaderComponent {
   showLoginButton: boolean = false;
   showwLogoutButton: boolean = false;
 
-
   constructor(private authService: AuthService) {
-    if (Object.keys(this.authService.tokenValue).length !== 0) {
-      this.showwLogoutButton = true;
-    } else {
-      this.showLoginButton = true;
-    }
+    this.showwLogoutButton = Object.keys(this.authService.tokenValue).length !== 0;
+    this.showLoginButton = !this.showwLogoutButton;
   }
-
-
-  ngOnInit() {
-
-  }
-
 
 
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable } from 'rxjs';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../services/auth.service';
 
@@ -9,9 +8,9 @@ import { AuthService } from '../services/auth.service';
 export class ApiPrefixInterceptor implements HttpInterceptor {
     private excludedUrlsRegex: RegExp[];
     private excludedUrls = ['.svg', '.json'];
-    private authLocalStorageToken = `${environment.appName}-${environment.USERDATA_KEY}`;
+    private authLocalStorageToken = `${environment.appName}-${environment.token}`;
 
-    constructor(private auth: AuthService, private router: Router) {
+    constructor(private auth: AuthService) {
         this.excludedUrlsRegex =
             this.excludedUrls.map(urlPattern => new RegExp(urlPattern, 'i')) || [];
     }
@@ -25,20 +24,15 @@ export class ApiPrefixInterceptor implements HttpInterceptor {
 
         if (
             !request.url.includes('auth/login')
-            &&!request.url.includes('markets')
-
-            // && !request.url.includes('Auth/forgotPassword')
-            // && !request.url.includes('Auth/verifyForgotPasswordToken')
-            // && !request.url.includes('Auth/changePasswordWithToken')
+            && !request.url.includes('markets')
         ) {
             const localData = JSON.parse(localStorage.getItem(`${this.authLocalStorageToken}`) || '');
-            console.log(localData);
             const token = localData;
             if (/^(http|https):/i.test(request.url)) {
                 request = request.clone({
                     setHeaders: { 'x-bitlo-auth': token }
                 });
-                
+
             }
         } else {
             if (!/^(http|https):/i.test(request.url)) {

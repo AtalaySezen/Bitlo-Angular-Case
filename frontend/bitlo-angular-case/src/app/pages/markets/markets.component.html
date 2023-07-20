@@ -6,13 +6,13 @@
     <div *ngIf="!loader" class="search-area">
         <div class="search-container">
             <div>
-                <h2 class="markets-header">Marketler</h2>
+                <h2 class="table-header">Marketler</h2>
             </div>
             <input (keyup)="applyFilter($event)" [(ngModel)]="input" class="search-input" type="search">
         </div>
     </div>
-    <div class="container-table" *ngIf="!loader">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #firstSort="matSort">
+    <div class="container-table" [class.none]="loader">
+        <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8" matSort #firstSort="matSort">
             <ng-container matColumnDef="index">
                 <th mat-header-cell *matHeaderCellDef> index </th>
                 <td mat-cell *matCellDef="let element"> {{element.index}} </td>
@@ -82,20 +82,60 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of datas" class="sticky left-0">
+        </mat-paginator>
     </div>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of datas" class="sticky left-0">
-    </mat-paginator>
+  
 
-    <div class="list-container">
+    <div class="list-container"  [class.none]="loader">
         <ul>
-            <li>{{positiveChangeResult}}</li>
-            <li>{{mostIncreasedMarket}}</li>
-            <li>{{mostDecreasedMarket}}</li>
-            <li>{{numberOfMarketsAbove10000}}</li>
-            <li>{{numberOfMarketsUnder1TRY}}</li>
-            <li>{{averagePrice}}</li>
-            <li>{{btcToDolarResult}} <span>burası kontrol edilecek.</span></li>
+            <ng-container *ngIf="withoutFilterParams">
+                <li>{{positiveChangeResult}}</li>
+                <li>{{mostIncreasedMarket}}</li>
+                <li>{{mostDecreasedMarket}}</li>
+                <li>{{numberOfMarketsAbove10000}}</li>
+                <li>{{numberOfMarketsUnder1TRY}}</li>
+                <li>{{averagePrice}}</li>
+                <li>{{btcToDolarResult}} <span>burası kontrol edilecek.</span></li>
+            </ng-container>
+
+            <ng-container *ngIf="withFilterParams">
+                <div class="image-container">
+                    <img class="image" [src]="previewImage" alt="Bitlo">
+                </div>
+                <ul *ngFor="let item of this.dataSource.filteredData">
+                    <li>
+                        {{marketCodeParams?.replace('-',' / ')}}
+                    </li>
+                    <li>
+                        {{item.currentQuote|number:'1.2-2'}}
+                    </li>
+                    <li>
+                        {{item.change24h|number:'1.2-2'}}
+                    </li>
+                    <li [ngClass]="{
+                        'red': item.change24hPercent < '0',
+                        'green': item.change24hPercent > '0',
+                        'black': item.change24hPercent === '0'
+                      }">
+                        {{item.change24hPercent|number:'1.2-2'}}
+                    </li>
+
+                    <li>
+                        {{item.highestQuote24h|number:'1.2-2'}}
+                    </li>
+
+                    <li>
+                        {{item.lowestQuote24h|number:'1.2-2'}}
+                    </li>
+                    <li>
+                        {{item.weightedAverage24h|number:'1.2-2'}}
+                    </li>
+                </ul>
+            </ng-container>
+
+
         </ul>
     </div>
 

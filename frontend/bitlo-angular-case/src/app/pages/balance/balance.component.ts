@@ -24,7 +24,6 @@ export class BalanceComponent {
     this.loader = true;
     this.balanceService.GetBalanceInformation().subscribe((data: any) => {
       console.log(data.balances);
-      this.balanceData = new MatTableDataSource<any>([]);
       this.balanceData.data = data.balances
       this.updateFilteredBalanceData();
       this.loader = false;

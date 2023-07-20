@@ -1,9 +1,7 @@
 mat-paginator {
     width: 100%;
 }
-table {
-    overflow: auto;
-}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -45,10 +43,6 @@ table {
     padding-left: 1rem;
 }
 
-.markets-header {
-    color: #0a2363;
-}
-
 .search-area {
     width: 100%;
 }
@@ -86,4 +80,9 @@ li {
     list-style: circle;
     font-size: 1rem;
     margin: 2px 0;
+}
+.image {
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 80px;
 }

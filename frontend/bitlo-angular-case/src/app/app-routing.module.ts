@@ -15,7 +15,6 @@ const routes: Routes = [
   { path: 'marketler', component: MarketsComponent },
   { path: 'marketler/:marketCode', component: MarketsComponent },
   { path: 'profil', component: ProfileComponent },
-  // { path: 'marketdetay', component: MarketsComponent },
   //Auth ile erişimi olanlar:
   { path: 'profil/bakiyeler', component: BalanceComponent, canActivate: [AuthGuard] },
   { path: 'profil/acik-emirler', component: OpentransactionsComponent, canActivate: [AuthGuard] },

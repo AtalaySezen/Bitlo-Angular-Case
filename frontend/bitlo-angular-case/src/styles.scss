@@ -25,7 +25,7 @@ body {
     background: #fff;
 }
 
-.loader{
+.loader {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,9 +33,26 @@ body {
     height: 100%;
 }
 
-table{
+table {
     width: 100%;
+    overflow: auto;
+    max-width: 1440px;
+    margin: 0 auto;
 }
-.cursor-pointer{
+
+.table-container {
+    width: 100%;
+    overflow: auto;
+}
+
+.cursor-pointer {
     cursor: pointer;
+}
+
+.table-header {
+    color: #0a2363;
+}
+
+.none {
+    display: none !important;
 }
