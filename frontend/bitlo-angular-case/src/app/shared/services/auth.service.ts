@@ -25,7 +25,6 @@ export class AuthService {
   }
 
   Logout() {
-
     localStorage.removeItem(`${this.authLocalStorageToken}`);
     this.router.navigate(['login']);
   }
@@ -33,6 +32,11 @@ export class AuthService {
   get tokenValue() {
     const token = JSON.parse(localStorage.getItem('bitlo-token') || '{}');
     return token;
+  }
+
+
+  get checkToken() {
+    return Object.keys(this.tokenValue).length !== 0;
   }
 
 

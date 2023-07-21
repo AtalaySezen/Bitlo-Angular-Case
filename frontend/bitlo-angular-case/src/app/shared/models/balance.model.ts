@@ -1,4 +1,4 @@
-export class balanceModel {
+export interface balanceModel {
     assetCode?: string;
     availableAmount?: number;
     availableAmountTRYValue?: number;

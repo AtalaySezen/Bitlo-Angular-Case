@@ -15,10 +15,13 @@ const routes: Routes = [
   { path: 'marketler', component: MarketsComponent, title: 'Marketler' },
   { path: 'marketler/:marketCode', component: MarketsComponent, title: 'Marketler' },
   { path: 'profil', component: ProfileComponent, title: 'Profil' },
+
   //Auth ile erişimi olanlar:
   { path: 'profil/bakiyeler', component: BalanceComponent, canActivate: [AuthGuard], title: 'Bakiyeler' },
   { path: 'profil/acik-emirler', component: OpentransactionsComponent, canActivate: [AuthGuard], title: 'Açık Emirler' },
-  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
+  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard], title: 'Logout' },
+  { path: '**', redirectTo: '' },
+
 ];
 
 @NgModule({

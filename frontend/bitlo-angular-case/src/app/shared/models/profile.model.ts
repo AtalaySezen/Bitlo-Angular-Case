@@ -1,5 +1,5 @@
 
-export class profile {
+export interface profile {
   country?: string;
   dateOfBirth?: string;
   firstName?: string;
