@@ -1,7 +1,4 @@
 <app-header></app-header>
-<div class="loader" *ngIf="loader">
-    <app-loader></app-loader>
-</div>
 <section class="container-profile" *ngIf="!loader">
     <ng-container *ngIf="!checkUserLogged">
         <p class="warn-message">Sadece giriş yapmış kullanıcılar bu alanı görüntüleyebilir</p>
@@ -19,8 +16,10 @@
         </div>
         <div class="btn-group">
             <button mat-raised-button color="primary" routerLink="/profil/bakiyeler">Bakiyeler</button>
-            <button class="btn" mat-raised-button color="accent" routerLink="/profil/acik-emirler">Açık Emirler</button>
+            <button class="btn" mat-raised-button color="accent" routerLink="/profil/acik-emirler">Açık
+                Emirler</button>
         </div>
     </ng-container>
+
 </section>
 <app-footer></app-footer>

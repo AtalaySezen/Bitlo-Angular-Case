@@ -1,89 +1,71 @@
-mat-paginator {
-    width: 100%;
-}
-
 .container {
+    width: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-.search-input {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #0a2363;
-    border-radius: 10px;
-    padding: 0.6rem;
-    width: 100%;
-    max-width: 300px;
-    border: 1px solid gray;
-    outline: none;
-}
+    max-width: 1440px;
+    margin: 0 auto;
 
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-    appearance: none;
-}
+    .hero-container {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-.search-container {
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    box-shadow:
-        0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-        0px 8px 10px 1px rgba(0, 0, 0, 0.14),
-        0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-    padding-left: 1rem;
-}
+    .search-area {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+    }
 
-.search-area {
-    width: 100%;
-}
+    .search-content {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem;
+    }
 
-.icon-search {
-    position: relative;
-    font-size: 1.4rem;
-    left: 2rem;
-}
+    .search-input {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #0a2363;
+        border-radius: 10px;
+        padding: 0.2rem;
+        width: 100%;
+        max-width: 300px;
+        border: 1px solid gray;
+        outline: none;
+        margin: 0.2rem 0;
+    }
 
-.container-table,
-.mat-elevation-z8 {
-    overflow-x: auto;
-    width: 100%;
-}
+    .container-table {
+        width: 100%;
+        margin: 0 auto;
+        overflow-x: auto;
+    }
 
-.red {
-    color: #ff5252;
-}
+    .table-div {
+        overflow: auto;
+    }
+    table {
+        overflow: auto;
+        display: block;
+    }
 
-.green {
-    color: #14c38e;
-}
+    .list-container {
+        display: flex;
+        align-items: flex-start;
+        width: 100%;
+        height: 100%;
+        margin: 2rem 2rem;
+        padding: 2rem;
+    }
 
-.black {
-    color: black;
-}
-
-.list-container {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-}
-li {
-    list-style: circle;
-    font-size: 1rem;
-    margin: 2px 0;
-}
-.image {
-    margin: 1rem 0;
-    width: 100%;
-    max-width: 80px;
+    li {
+        list-style: disc;
+        font-size: 1.1rem;
+    }
 }

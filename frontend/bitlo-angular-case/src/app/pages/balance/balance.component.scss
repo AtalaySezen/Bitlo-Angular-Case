@@ -6,21 +6,27 @@
     align-items: start;
     justify-content: start;
     max-width: 1440px;
-    margin: 0 auto;
-}
+    margin: 0rem auto;
 
-.table-container {
-    width: 100%;
-    overflow: auto;
-}
+    .content-balance {
+        margin-top: 2rem;
+        width: 100%;
+    }
 
-.example-section {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: 60px;
-}
+    .table-container {
+        overflow: auto;
+        width: 100%;
+        padding: 0.7rem;
+    }
 
-.example-margin {
-    margin: 0 10px;
+    .checkbox-section {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 60px;
+    }
+
+    .checkbox-margin {
+        margin: 0 10px;
+    }
 }

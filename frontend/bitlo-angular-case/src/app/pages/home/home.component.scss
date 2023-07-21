@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -13,9 +14,8 @@
     border-radius: 20px;
     padding: 3rem;
 }
-p,
-a,
-span {
+
+.home-content {
     text-decoration: none;
     color: black;
     font-size: 1.2rem;
@@ -29,11 +29,12 @@ span {
     align-items: center;
     justify-content: center;
 }
-
-mat-icon {
-    color: #0a2363;
-    font-size: 1.5rem;
-    margin-right: 5px;
+.container {
+    mat-icon {
+        color: #0a2363;
+        font-size: 1.5rem;
+        margin-right: 5px;
+    }
 }
 
 .github-icon {

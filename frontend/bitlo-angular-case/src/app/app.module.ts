@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MarketsComponent } from './pages/markets/markets.component';
@@ -13,7 +12,6 @@ import { BalanceComponent } from './pages/balance/balance.component';
 import { OpentransactionsComponent } from './pages/opentransactions/opentransactions.component';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,18 +24,20 @@ import { MatTableModule } from '@angular/material/table';
 import { PhoneFormatPipe } from './shared/pipes/phone-format.pipe';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { HeaderComponent } from './components/header/header.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ProfileComponent,
-    HeaderComponent,
     FooterComponent,
     LoginComponent,
     MarketsComponent,
     BalanceComponent,
+    HeaderComponent,
     OpentransactionsComponent,
     LogoutComponent,
     PhoneFormatPipe,
@@ -47,9 +47,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTableModule,
     FormsModule,
     MatPaginatorModule,
+    MatToolbarModule,
     LoaderComponent,
     MatFormFieldModule,
-    MatToolbarModule,
     MatButtonModule,
     MatSortModule,
     ReactiveFormsModule,

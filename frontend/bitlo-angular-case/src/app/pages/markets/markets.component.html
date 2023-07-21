@@ -4,15 +4,15 @@
 </div>
 <section class="container">
     <div *ngIf="!loader" class="search-area">
-        <div class="search-container">
+        <div class="search-content">
             <div>
                 <h2 class="table-header">Marketler</h2>
             </div>
             <input (keyup)="applyFilter($event)" [(ngModel)]="input" class="search-input" type="search">
         </div>
     </div>
-
-        <div class="container-table" [class.none]="loader">
+    <div class="container-table" [class.none]="loader">
+        <div class="table-div">
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort #firstSort="matSort">
                 <ng-container matColumnDef="index">
                     <th mat-header-cell *matHeaderCellDef> index </th>
@@ -22,7 +22,7 @@
                 <ng-container matColumnDef="marketCode">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> marketCode </th>
                     <td mat-cell *matCellDef="let element" class="cursor-pointer"
-                        (click)="goMarketDetail(element.marketCode   )"> {{element.marketCode}} </td>
+                        (click)="goMarketDetail(element.marketCode)"> {{element.marketCode}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="notionalVolume24h">
@@ -83,16 +83,15 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of datas" class="sticky left-0">
-            </mat-paginator>
         </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of datas" class="sticky left-0">
+        </mat-paginator>
 
-
-
+    </div>
 
     <div class="list-container" [class.none]="loader">
-        <ul>
-            <ng-container *ngIf="withoutFilterParams">
+        <ng-container *ngIf="withoutFilterParams">
+            <ul>
                 <li>{{positiveChangeResult}}</li>
                 <li>{{mostIncreasedMarket}}</li>
                 <li>{{mostDecreasedMarket}}</li>
@@ -103,46 +102,48 @@
                     {{averagePrice|number:'1.2-2'}} <span>TRY dir.</span>
                 </li>
                 <li><span>1 BTC = </span>{{btcToDolarResult|number:'1.2-2'}} <span>ABD dolarıdır</span></li>
-            </ng-container>
+            </ul>
+        </ng-container>
 
-            <ng-container *ngIf="withFilterParams">
-                <div class="image-container">
-                    <img class="image" [src]="previewImage" alt="Bitlo">
-                </div>
-                <ul *ngFor="let item of this.dataSource.filteredData">
-                    <li>
-                        {{marketCodeParams?.replace('-',' / ')}}
-                    </li>
-                    <li>
-                        {{item.currentQuote|number:'1.2-2'}}
-                    </li>
-                    <li>
-                        {{item.change24h|number:'1.2-2'}}
-                    </li>
-                    <li [ngClass]="{
+        <ng-container *ngIf="withFilterParams">
+            <div class="image-container">
+                <img class="image" [src]="previewImage" alt="Bitlo">
+            </div>
+            <ul *ngFor="let item of this.dataSource.filteredData">
+                <li>
+                    {{marketCodeParams?.replace('-',' / ')}}
+                </li>
+                <li>
+                    {{item.currentQuote|number:'1.2-2'}}
+                </li>
+                <li>
+                    {{item.change24h|number:'1.2-2'}}
+                </li>
+                <li [ngClass]="{
                         'red': item.change24hPercent < '0',
                         'green': item.change24hPercent > '0',
                         'black': item.change24hPercent === '0'
                       }">
-                        {{item.change24hPercent|number:'1.2-2'}}
-                    </li>
+                    {{item.change24hPercent|number:'1.2-2'}}
+                </li>
 
-                    <li>
-                        {{item.highestQuote24h|number:'1.2-2'}}
-                    </li>
+                <li>
+                    {{item.highestQuote24h|number:'1.2-2'}}
+                </li>
 
-                    <li>
-                        {{item.lowestQuote24h|number:'1.2-2'}}
-                    </li>
-                    <li>
-                        {{item.weightedAverage24h|number:'1.2-2'}}
-                    </li>
-                </ul>
-            </ng-container>
+                <li>
+                    {{item.lowestQuote24h|number:'1.2-2'}}
+                </li>
+                <li>
+                    {{item.weightedAverage24h|number:'1.2-2'}}
+                </li>
+            </ul>
+        </ng-container>
 
-
-        </ul>
     </div>
 
+
+
 </section>
+
 <app-footer></app-footer>
