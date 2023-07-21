@@ -25,12 +25,10 @@ export class BalanceComponent {
     this.balanceService.GetBalanceInformation().subscribe((data: any) => {
       console.log(data.balances);
       this.balanceData.data = data.balances
-      this.updateFilteredBalanceData();
+      // this.updateFilteredBalanceData();
       this.loader = false;
     })
   }
-
-
 
   updateFilteredBalanceData() {
     if (this.hideLowBalances) {
@@ -38,18 +36,28 @@ export class BalanceComponent {
         return element.availableAmount >= 1 && element.availableAmountTRYValue >= 1;
       });
     } else {
-      this.filteredBalanceData.data = this.balanceData.data;
+      this.filteredBalanceData.data = this.balanceData.data.filter((element: any) => {
+        return true;
+      });
     }
   }
 
-  shouldShowValue(element: any, column: string): boolean {
+
+  shouldShowValue(element: any, column: string) {
+
     if (column === 'availableAmount') {
       return !(this.hideLowBalances && element[column] < 1);
     } else if (column === 'availableAmountTRYValue') {
       return !(this.hideLowBalances && element[column] < 1);
     }
+
+
+
+
     return true;
   }
+
+
 
 
 }

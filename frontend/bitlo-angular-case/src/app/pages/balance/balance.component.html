@@ -9,10 +9,9 @@
     </section>
     <div class="table-container">
         <table mat-table [dataSource]="balanceData" class="mat-elevation-z8">
-            <ng-container matColumnDef="assetCode">
+            <ng-container matColumnDef="assetCode" >
                 <th mat-header-cell *matHeaderCellDef> assetCode </th>
                 <td mat-cell *matCellDef="let element"> {{element.assetCode}} </td>
-                
             </ng-container>
 
             <ng-container matColumnDef="availableAmount">

@@ -11,13 +11,13 @@ import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'marketler', component: MarketsComponent },
-  { path: 'marketler/:marketCode', component: MarketsComponent },
-  { path: 'profil', component: ProfileComponent },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'marketler', component: MarketsComponent, title: 'Marketler' },
+  { path: 'marketler/:marketCode', component: MarketsComponent, title: 'Marketler' },
+  { path: 'profil', component: ProfileComponent, title: 'Profil' },
   //Auth ile erişimi olanlar:
-  { path: 'profil/bakiyeler', component: BalanceComponent, canActivate: [AuthGuard] },
-  { path: 'profil/acik-emirler', component: OpentransactionsComponent, canActivate: [AuthGuard] },
+  { path: 'profil/bakiyeler', component: BalanceComponent, canActivate: [AuthGuard], title: 'Bakiyeler' },
+  { path: 'profil/acik-emirler', component: OpentransactionsComponent, canActivate: [AuthGuard], title: 'Açık Emirler' },
   { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
 ];
 

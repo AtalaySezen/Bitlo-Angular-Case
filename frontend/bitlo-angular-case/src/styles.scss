@@ -56,3 +56,9 @@ table {
 .none {
     display: none !important;
 }
+
+.mat-mdc-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+}
