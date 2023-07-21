@@ -44,9 +44,11 @@ export class MarketsComponent {
       this.withFilterParams = !this.withoutFilterParams;
     });
 
-    this.getMarketsData();
   }
 
+  ngOnInit() {
+    this.getMarketsData();
+  }
 
   getMarketsData() {
     this.loader = true;

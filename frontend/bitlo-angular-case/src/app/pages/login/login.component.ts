@@ -21,7 +21,9 @@ export class LoginComponent {
     if (Object.keys(this.authService.tokenValue).length !== 0) {
       this.router.navigate(['/profil'])
     }
-  }
+     console.log(this.authService.checkToken);
+
+    }
 
 
   ngOnInit(): void {

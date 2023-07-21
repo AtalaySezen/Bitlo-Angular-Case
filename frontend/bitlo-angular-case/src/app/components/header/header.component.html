@@ -5,29 +5,10 @@
             <a routerLink="/">
                 <img src="assets/images/logos/bitlo_logo_white_@2x.webp" class="header-logo" alt="Bitlo">
             </a>
-            <nav class="nav">
-                <ul class="nav-links">
-                    <li>
-                        <a routerLink="">Anasayfa</a>
-                    </li>
-                    <li>
-                        <a routerLink="/marketler">Profil</a>
-                    </li>
-                    <li>
-                        <a routerLink="/marketler">Marketler</a>
-                    </li>
-                    <li>
-                        <a routerLink="/marketler">Bakiyeler</a>
-                    </li>
-                    <li>
-                        <a routerLink="/marketler">Açık Bakiyeler</a>
-                    </li>
-                </ul>
-            </nav>
             <span class="example-spacer"></span>
             
-            <button routerLink="/login" *ngIf="showLoginButton" mat-raised-button color="loginBtn">Giriş Yap</button>
-            <button routerLink="/logout" *ngIf="showwLogoutButton" mat-raised-button color="warn">Çıkış Yap</button>
+            <button routerLink="login" *ngIf="showLoginButton" mat-raised-button color="loginBtn">Giriş Yap</button>
+            <button routerLink="logout" *ngIf="showwLogoutButton" mat-raised-button color="warn">Çıkış Yap</button>
         </mat-toolbar-row>
     </mat-toolbar>
 

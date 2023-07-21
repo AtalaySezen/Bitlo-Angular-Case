@@ -17,18 +17,21 @@ export class BalanceComponent {
 
 
   constructor(private balanceService: BalanceService) {
+  }
+
+  ngOnInit() {
     this.getBalanceData();
   }
 
   getBalanceData() {
     this.loader = true;
     this.balanceService.GetBalanceInformation().subscribe((data: any) => {
-      console.log(data.balances);
       this.balanceData.data = data.balances
       // this.updateFilteredBalanceData();
       this.loader = false;
     })
   }
+
 
   updateFilteredBalanceData() {
     if (this.hideLowBalances) {
@@ -44,7 +47,6 @@ export class BalanceComponent {
 
 
   shouldShowValue(element: any, column: string) {
-
     if (column === 'availableAmount') {
       return !(this.hideLowBalances && element[column] < 1);
     } else if (column === 'availableAmountTRYValue') {
