@@ -8,7 +8,9 @@ import { AuthService } from '../services/auth.service';
 export class ApiPrefixInterceptor implements HttpInterceptor {
     private authLocalStorageToken = `${environment.appName}-${environment.token}`;
 
-    constructor(private auth: AuthService) {}
+    constructor(private auth: AuthService) {
+
+    }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (

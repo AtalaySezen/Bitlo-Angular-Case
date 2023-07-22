@@ -16,7 +16,10 @@ export class ProfileComponent {
   displayedColumns: string[] = ['createdBy', 'from', 'to'];
 
   constructor(private profileService: ProfileService, private authService: AuthService) {
-    this.checkUserLogged = Object.keys(this.authService.tokenValue).length !== 0;
+    this.checkUserLogged = this.authService.checkToken;
+  }
+
+  ngOnInit() {
     this.getProfileData();
   }
 
@@ -28,6 +31,9 @@ export class ProfileComponent {
         if (data.message === 'Auth success') {
           this.profileData = data.me;
         }
+        this.loader = false;
+      },
+      error: (err) => {
         this.loader = false;
       }
     });

@@ -14,10 +14,11 @@ export class OpentransactionsComponent {
   displayedColumns: string[] = ['marketCode', 'orderSide', 'orderDate', 'price', 'orderAmount', 'fillAmount', 'fillPercent'];
 
 
-  constructor(private openOrdersService: OpenordersService) {
+  constructor(private openOrdersService: OpenordersService) { }
+
+  ngOnInit() {
     this.getOpenOrdersData();
   }
-
 
   getOpenOrdersData() {
     this.loader = true;

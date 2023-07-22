@@ -15,7 +15,6 @@ export class BalanceComponent {
   hideLowBalances: boolean = true;
   filteredBalanceData = new MatTableDataSource<balanceModel>();
 
-
   constructor(private balanceService: BalanceService) {
   }
 

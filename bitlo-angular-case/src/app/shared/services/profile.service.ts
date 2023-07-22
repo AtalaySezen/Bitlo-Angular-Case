@@ -13,11 +13,7 @@ export class ProfileService {
   constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService) { }
 
   GetProfileInformations(): Observable<ProfileResponse> {
-    return this.http.post<ProfileResponse>(environment.apiUrl + 'auth/me', {}).pipe(
-      catchError((error) => {
-        return throwError(() => this.errorHandlerService.handleError(error));
-      })
-    );
+    return this.http.post<ProfileResponse>(environment.apiUrl + 'auth/me', {})
   }
 
 }

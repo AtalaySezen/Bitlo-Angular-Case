@@ -18,11 +18,7 @@ export class LoginComponent {
   errorMessage: string;
 
   constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder, private profileService: ProfileService) {
-    if (Object.keys(this.authService.tokenValue).length !== 0) {
-      this.router.navigate(['/profil'])
-    }
-    console.log(this.authService.checkToken);
-
+    this.checkUserLogged();
   }
 
 
@@ -33,6 +29,12 @@ export class LoginComponent {
     });
   }
 
+  checkUserLogged() {
+    if (this.authService.checkToken == true) {
+      this.authService.Router('/profil');
+    }
+
+  }
 
   userLogin() {
     this.loading = true;
@@ -44,7 +46,7 @@ export class LoginComponent {
         if (data.message === 'Login success') {
           this.userErrorMessage = false;
           this.authService.SetStorageUser(data.token);
-          this.router.navigate(['/profil']);
+          this.authService.Router('/profil');
         }
       },
       error: (err) => {
