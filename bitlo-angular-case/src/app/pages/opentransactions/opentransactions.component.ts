@@ -28,6 +28,9 @@ export class OpentransactionsComponent {
           this.openOrdersData = new MatTableDataSource(data.openOrders);
         }
         this.loader = false;
+      },
+      error: () => {
+        this.loader = false;
       }
     });
   }

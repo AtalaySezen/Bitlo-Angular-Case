@@ -50,6 +50,7 @@
     .table-div {
         overflow: auto;
     }
+
     table {
         overflow: auto;
         display: block;
@@ -63,9 +64,7 @@
         margin: 2rem 2rem;
         padding: 2rem;
     }
-
-    li {
-        list-style: disc;
+    .search-result {
         font-size: 1.1rem;
     }
 }

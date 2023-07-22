@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarketData } from 'src/app/shared/models/markets.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-markets',
@@ -26,27 +27,24 @@ export class MarketsComponent {
   averagePrice: string;
   btcToDolarResult: number;
   marketCodeParams: string | null;
-  withoutFilterParams: boolean = false;
-  withFilterParams: boolean = false;
   previewImage: string = '';
   positiveChanges: MarketData[];
-
+  listArray: any[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-
-  constructor(private marketService: MarketService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.marketCodeParams = params.get('marketCode');
-      this.withoutFilterParams = this.marketCodeParams === null;
-      this.withFilterParams = !this.withoutFilterParams;
-    });
-
+  constructor(private marketService: MarketService, private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+    this.getMarketUserParams();
   }
 
   ngOnInit() {
     this.getMarketsData();
+  }
+
+  getMarketUserParams() {
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.marketCodeParams = params.get('marketCode');
+    });
   }
 
   getMarketsData() {
@@ -76,6 +74,9 @@ export class MarketsComponent {
         this.calculateDolarPrice();
 
         this.loader = false;
+      },
+      error: () => {
+        this.loader = false;
       }
     });
 
@@ -89,6 +90,7 @@ export class MarketsComponent {
     });
 
     this.positiveChangeResult = `Bugün ${this.positiveChanges.length} adet marketin fiyat değişim yüzdesi pozitif olmuştur.`;
+    this.listArray.push({ 'positiveChangeResult': this.positiveChangeResult });
 
   }
 
@@ -106,6 +108,7 @@ export class MarketsComponent {
     }
 
     this.mostIncreasedMarket = `Bugün en fazla artış gösteren ${mostIncreasedMarketValue?.change24hPercent} market ${mostIncreasedMarketValue?.marketCode} marketi olmuştur.`
+    this.listArray.push({ 'mostIncreasedMarket': this.mostIncreasedMarket });
 
   }
 
@@ -122,12 +125,14 @@ export class MarketsComponent {
     }
 
     this.mostDecreasedMarket = `Bugün en fazla değer kaybeden ${mostDecreasedMarketValue?.change24hPercent} market ${mostDecreasedMarketValue?.marketCode} marketi olmuştur`
+    this.listArray.push({ 'mostDecreasedMarket': this.mostDecreasedMarket });
+
   }
 
   countMarketsAbove10000TRY(marketDatas: MarketData[]) {
     let count = 0;
-
     const thresholdPrice = 10000;
+
     for (const marketData of marketDatas) {
       const currentQuote = Number(marketData.currentQuote);
       if (currentQuote > thresholdPrice) {
@@ -136,6 +141,7 @@ export class MarketsComponent {
     }
 
     this.numberOfMarketsAbove10000 = `Fiyatı (currentQuote) 10,000 TRY üzerinde olan toplam ${count} adet market vardır.`
+    this.listArray.push({ 'numberOfMarketsAbove10000': this.numberOfMarketsAbove10000 });
   }
 
 
@@ -150,7 +156,9 @@ export class MarketsComponent {
       }
     }
 
-    this.numberOfMarketsUnder1TRY = `Fiyatı (currentQuote) 1.00 TRY’den daha az olan toplam ${count} adet market vardır)`
+    this.numberOfMarketsUnder1TRY = `Fiyatı (currentQuote) 1.00 TRY’den daha az olan toplam ${count} adet market vardır.`
+    this.listArray.push({ 'numberOfMarketsUnder1TRY': this.numberOfMarketsUnder1TRY });
+
   }
 
   calculateAveragePrice(marketDatas: any[]) {
@@ -165,6 +173,8 @@ export class MarketsComponent {
       return false;
     } else {
       this.averagePrice = `${totalPrices / marketCount}`;
+      this.listArray.push({ 'averagePrice': this.averagePrice });
+
       return true;
     }
   }
@@ -176,7 +186,8 @@ export class MarketsComponent {
     const btcTryPriceValue = Number(btcTryPrice || '1');
     const usdtTryPriceValue = Number(usdtTryPrice || '1');
 
-    this.btcToDolarResult = btcTryPriceValue / usdtTryPriceValue;;
+    this.btcToDolarResult = btcTryPriceValue / usdtTryPriceValue;
+    this.listArray.push({ 'btcToDolarResult': this.btcToDolarResult });
 
   }
 
@@ -184,6 +195,8 @@ export class MarketsComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim();
+    this.listArray = [];
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
 
@@ -193,14 +206,12 @@ export class MarketsComponent {
       this.countMarketsAbove10000TRY(this.dataSource.filteredData);
       this.countMarketsBelow1TRY(this.dataSource.filteredData);
       this.calculateAveragePrice(this.dataSource.filteredData);
-
+      this.calculateDolarPrice();
     }
   }
 
   goMarketDetail(marketCode: string) {
-    this.router.navigate(
-      ['/marketler', marketCode],
-    );
+    this.authService.Router(['/marketler', marketCode])
   }
 
 

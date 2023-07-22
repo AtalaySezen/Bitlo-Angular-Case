@@ -1,0 +1,55 @@
+<ng-container *ngIf="withoutFilterParams">
+    <div *ngFor="let item of listArray">
+        <ul>
+            <li *ngIf="item?.positiveChangeResult">{{item.positiveChangeResult}}</li>
+            <li *ngIf="item?.mostIncreasedMarket">{{item.mostIncreasedMarket}}</li>
+            <li *ngIf="item?.mostDecreasedMarket">{{item.mostDecreasedMarket}}</li>
+            <li *ngIf="item?.numberOfMarketsAbove10000">{{item.numberOfMarketsAbove10000}}</li>
+            <li *ngIf="item?.numberOfMarketsUnder1TRY">{{item.numberOfMarketsUnder1TRY}}</li>
+            <li *ngIf="item?.averagePrice">
+                <span>Tüm marketlerdeki fiyatların toplamının (currentQuote) aritmetik ortalaması</span>
+                {{item.averagePrice|number:'1.2-2'}} <span>TRY dir.</span>
+            </li>
+            <li *ngIf="item?.btcToDolarResult"><span>1 BTC = </span>{{item.btcToDolarResult|number:'1.2-2'}}
+                <span>ABD
+                    dolarıdır</span>
+            </li>
+        </ul>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="withFilterParams">
+    <div class="image-container">
+        <img class="image" [src]="previewImage" alt="Bitlo">
+    </div>
+    <ul *ngFor="let item of this.dataSource.filteredData">
+        <li>
+            {{marketCodeParams?.replace('-',' / ')}}
+        </li>
+        <li>
+            {{item?.currentQuote|number:'1.2-2'}}
+        </li>
+        <li>
+            {{item?.change24h|number:'1.2-2'}}
+        </li>
+        <li [ngClass]="{
+                'red': item.change24hPercent < '0',
+                'green': item.change24hPercent > '0',
+                'black': item.change24hPercent === '0'
+              }">
+            {{item?.change24hPercent|number:'1.2-2'}}
+        </li>
+
+        <li>
+            {{item?.highestQuote24h|number:'1.2-2'}}
+        </li>
+
+        <li>
+            {{item?.lowestQuote24h|number:'1.2-2'}}
+        </li>
+        <li>
+            {{item?.weightedAverage24h|number:'1.2-2'}}
+        </li>
+    </ul>
+
+</ng-container>

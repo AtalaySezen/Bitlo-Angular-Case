@@ -1,6 +1,6 @@
 export interface balanceModel {
     assetCode?: string;
-    availableAmount?: number;
+    availableAmount: number;
     availableAmountTRYValue?: number;
     balances?:[{
         assetCode?: string;
