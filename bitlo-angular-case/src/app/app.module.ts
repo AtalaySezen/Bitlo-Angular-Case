@@ -27,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ListComponent } from './components/list/list.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     OpentransactionsComponent,
     LogoutComponent,
     PhoneFormatPipe,
+    ListComponent,
   ],
   imports: [
     BrowserModule,

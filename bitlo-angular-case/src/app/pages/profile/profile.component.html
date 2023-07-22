@@ -1,4 +1,5 @@
-<app-header *ngIf="!loader"></app-header>
+<app-header></app-header>
+<app-loader [diameter]="100" *ngIf="loader"></app-loader>
 <section class="container-profile" *ngIf="!loader">
     <ng-container *ngIf="!checkUserLogged">
         <p class="warn-message">Sadece giriş yapmış kullanıcılar bu alanı görüntüleyebilir</p>
@@ -8,8 +9,8 @@
             <table class="mat-elevation-z8 table-custom">
                 <tbody *ngFor="let item of profileData | keyvalue">
                     <tr>
-                        <td>{{item.key}}</td>
-                        <td>{{ item.key === 'phoneNumber' ? (item.value | phoneFormat) : item.value }}</td>
+                        <td>{{item?.key}}</td>
+                        <td>{{ item?.key === 'phoneNumber' ? (item.value | phoneFormat) : item?.value }}</td>
                     </tr>
                 </tbody>
             </table>

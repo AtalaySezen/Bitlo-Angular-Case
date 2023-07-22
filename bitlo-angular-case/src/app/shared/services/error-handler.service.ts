@@ -8,7 +8,9 @@ export class ErrorHandlerService {
   constructor() { }
 
   handleError(error: any): void {
-    console.error("Bir Hata Oluştu:", error.error.message);
+    const errorMessage = error?.error?.message;
+    console.error("Bir Hata Oluştu:", errorMessage || error);
+    
   }
 
 }

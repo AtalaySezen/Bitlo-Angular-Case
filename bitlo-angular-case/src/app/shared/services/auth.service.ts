@@ -32,7 +32,7 @@ export class AuthService {
 
   Logout() {
     localStorage.removeItem(`${this.authLocalStorageToken}`);
-    this.Router('/login');
+    this.Router(['/login']);
   }
 
   get tokenValue(): string {
@@ -45,8 +45,8 @@ export class AuthService {
     return Object.keys(this.tokenValue).length !== 0;
   }
 
-  Router(path: string) {
-    this.router.navigate([path]);
+  Router(path: string[]) {
+    this.router.navigate(path);
   }
 
 

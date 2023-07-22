@@ -1,7 +1,5 @@
 <app-header></app-header>
-<div class="loader" *ngIf="loader">
-    <app-loader></app-loader>
-</div>
+<app-loader [diameter]="100" *ngIf="loader"></app-loader>
 <section class="container-balance" *ngIf="!loader">
     <div class="content-balance">
 
@@ -13,19 +11,19 @@
             <table mat-table [dataSource]="balanceData" class="mat-elevation-z8">
                 <ng-container matColumnDef="assetCode">
                     <th mat-header-cell *matHeaderCellDef> assetCode </th>
-                    <td mat-cell *matCellDef="let element"> {{element.assetCode}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element?.assetCode}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="availableAmount">
                     <th mat-header-cell *matHeaderCellDef> availableAmount</th>
-                    <td mat-cell *matCellDef="let element"> {{element.availableAmount| number:'1.2-2'}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element?.availableAmount| number:'1.2-2'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="availableAmountTRYValue">
                     <th mat-header-cell *matHeaderCellDef> availableAmountTRYValue</th>
                     <td mat-cell *matCellDef="let element">
                         <ng-container *ngIf="shouldShowValue(element, 'availableAmountTRYValue'); else hideValue">
-                            {{element.availableAmountTRYValue | number:'1.2-2'}}
+                            {{element?.availableAmountTRYValue | number:'1.2-2'}}
                         </ng-container>
                         <ng-template #hideValue>***</ng-template>
                     </td>

@@ -31,7 +31,7 @@ export class LoginComponent {
 
   checkUserLogged() {
     if (this.authService.checkToken == true) {
-      this.authService.Router('/profil');
+      this.authService.Router(['/profil']);
     }
 
   }
@@ -46,7 +46,7 @@ export class LoginComponent {
         if (data.message === 'Login success') {
           this.userErrorMessage = false;
           this.authService.SetStorageUser(data.token);
-          this.authService.Router('/profil');
+          this.authService.Router(['/profil']);
         }
       },
       error: (err) => {

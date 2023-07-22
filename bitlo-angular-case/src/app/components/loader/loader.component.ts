@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
@@ -10,5 +10,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 
 export class LoaderComponent {
+  @Input() diameter:number = 100;
 
+
+  ngOnInit(){
+    
+  }
 }
