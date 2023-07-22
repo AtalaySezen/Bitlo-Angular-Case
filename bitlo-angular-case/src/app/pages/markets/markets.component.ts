@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MarketData } from 'src/app/shared/models/markets.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { SnackbarService } from 'src/app/components/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-markets',
@@ -33,7 +34,7 @@ export class MarketsComponent {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private marketService: MarketService, private router: Router, private activatedRoute: ActivatedRoute, private authService: AuthService) {
+  constructor(private marketService: MarketService, private snackbarService: SnackbarService, private activatedRoute: ActivatedRoute, private authService: AuthService) {
     this.getMarketUserParams();
   }
 
@@ -102,7 +103,8 @@ export class MarketsComponent {
         this.positiveChangeResult = `Bugün ${this.positiveChanges.length} adet marketin fiyat değişim yüzdesi pozitif olmuştur.`;
         this.listArray.push({ 'positiveChangeResult': this.positiveChangeResult });
       }
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
   }
@@ -125,7 +127,8 @@ export class MarketsComponent {
         this.listArray.push({ 'mostIncreasedMarket': this.mostIncreasedMarket });
       }
 
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
   }
@@ -148,7 +151,8 @@ export class MarketsComponent {
         this.listArray.push({ 'mostDecreasedMarket': this.mostDecreasedMarket });
       }
 
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
   }
@@ -168,7 +172,8 @@ export class MarketsComponent {
         this.numberOfMarketsAbove10000 = `Fiyatı (currentQuote) 10,000 TRY üzerinde olan toplam ${count} adet market vardır.`;
         this.listArray.push({ 'numberOfMarketsAbove10000': this.numberOfMarketsAbove10000 });
       }
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
   }
@@ -190,7 +195,8 @@ export class MarketsComponent {
         this.listArray.push({ 'numberOfMarketsUnder1TRY': this.numberOfMarketsUnder1TRY });
       }
 
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
   }
@@ -211,7 +217,8 @@ export class MarketsComponent {
         this.listArray.push({ 'averagePrice': this.averagePrice });
         return true;
       }
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
       return false;
     }
@@ -227,7 +234,8 @@ export class MarketsComponent {
 
       this.btcToDolarResult = btcTryPriceValue / usdtTryPriceValue;
       this.listArray.push({ 'btcToDolarResult': this.btcToDolarResult });
-    } catch (error) {
+    } catch (error: any) {
+      this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
   }
