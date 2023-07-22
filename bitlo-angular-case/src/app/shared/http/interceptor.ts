@@ -6,22 +6,11 @@ import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class ApiPrefixInterceptor implements HttpInterceptor {
-    private excludedUrlsRegex: RegExp[];
-    private excludedUrls = ['.svg', '.json'];
     private authLocalStorageToken = `${environment.appName}-${environment.token}`;
 
-    constructor(private auth: AuthService) {
-        this.excludedUrlsRegex =
-            this.excludedUrls.map(urlPattern => new RegExp(urlPattern, 'i')) || [];
-    }
+    constructor(private auth: AuthService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const passThrough: boolean =
-            !!this.excludedUrlsRegex.find(regex => regex.test(request.url));
-        if (passThrough) {
-            return next.handle(request);
-        }
-
         if (
             !request.url.includes('auth/login')
             && !request.url.includes('markets')

@@ -10,10 +10,10 @@ import { BalanceService } from 'src/app/shared/services/balance.service';
 })
 export class BalanceComponent {
   loader: boolean = false;
-  balanceData = new MatTableDataSource<any>();
+  balanceData = new MatTableDataSource<balanceModel>();
   displayedColumns: string[] = ['assetCode', 'availableAmount', 'availableAmountTRYValue'];
   hideLowBalances: boolean = true;
-  filteredBalanceData = new MatTableDataSource<any>();
+  filteredBalanceData = new MatTableDataSource<balanceModel>();
 
 
   constructor(private balanceService: BalanceService) {
@@ -25,11 +25,12 @@ export class BalanceComponent {
 
   getBalanceData() {
     this.loader = true;
-    this.balanceService.GetBalanceInformation().subscribe((data: any) => {
-      this.balanceData.data = data.balances
-      // this.updateFilteredBalanceData();
-      this.loader = false;
-    })
+    this.balanceService.GetBalanceInformation().subscribe({
+      next: (data: any) => {
+        this.balanceData.data = data.balances;
+        this.loader = false;
+      }
+    });
   }
 
 
@@ -52,9 +53,6 @@ export class BalanceComponent {
     } else if (column === 'availableAmountTRYValue') {
       return !(this.hideLowBalances && element[column] < 1);
     }
-
-
-
 
     return true;
   }

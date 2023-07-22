@@ -21,20 +21,16 @@ export class OpentransactionsComponent {
 
   getOpenOrdersData() {
     this.loader = true;
-    this.openOrdersService.GetProfileInformations().subscribe((data: ApiResponse) => {
-
-      if (data.message == 'Auth success') {
-        this.openOrdersData = new MatTableDataSource(data.openOrders);
-        this.loader = false;
-      } else {
+    this.openOrdersService.GetOpenOrders().subscribe({
+      next: (data: ApiResponse) => {
+        if (data.message === 'Auth success') {
+          this.openOrdersData = new MatTableDataSource(data.openOrders);
+        }
         this.loader = false;
       }
-
-    }, err => {
-      this.loader = false;
-      console.log('Bir hata oluştu:', err);
-    })
+    });
   }
+
 
 
 

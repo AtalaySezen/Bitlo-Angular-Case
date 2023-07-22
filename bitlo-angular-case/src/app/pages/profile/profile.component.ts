@@ -23,18 +23,14 @@ export class ProfileComponent {
 
   getProfileData() {
     this.loader = true;
-    this.profileService.GetProfileInformations().subscribe((data: ProfileResponse) => {
-      if (data.message = 'Auth success') {
-        this.profileData = data.me;
-        this.loader = false;
-      } else {
+    this.profileService.GetProfileInformations().subscribe({
+      next: (data: ProfileResponse) => {
+        if (data.message === 'Auth success') {
+          this.profileData = data.me;
+        }
         this.loader = false;
       }
-    },
-      err => {
-        console.log('Bir hata oluştu:', err);
-        this.loader = false;
-      })
+    });
   }
 
 

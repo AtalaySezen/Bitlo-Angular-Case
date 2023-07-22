@@ -39,7 +39,6 @@ export class MarketsComponent {
   constructor(private marketService: MarketService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe(params => {
       this.marketCodeParams = params.get('marketCode');
-
       this.withoutFilterParams = this.marketCodeParams === null;
       this.withFilterParams = !this.withoutFilterParams;
     });
@@ -53,34 +52,35 @@ export class MarketsComponent {
   getMarketsData() {
     this.loader = true;
 
-    this.marketService.GetProfileInformations().subscribe((data: MarketData[]) => {
-      const dataWithIndex = data.map((item: any, index: number) => ({ ...item, index: index + 1 }));
-      this.marketDatas = data;
-      this.dataSource = new MatTableDataSource(dataWithIndex);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+    this.marketService.GetMarketDatas().subscribe({
+      next: (data: MarketData[]) => {
+        const dataWithIndex = data.map((item: any, index: number) => ({ ...item, index: index + 1 }));
+        this.marketDatas = data;
+        this.dataSource = new MatTableDataSource(dataWithIndex);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
 
-      if (this.marketCodeParams) {
-        this.dataSource.filter = this.marketCodeParams;
-        const imageParts = this.marketCodeParams.split("-");
-        const imageResult = imageParts[0].toLowerCase();
-        this.previewImage = `https://static.bitlo.com/cryptologossvg/${imageResult}.svg`
+        if (this.marketCodeParams) {
+          this.dataSource.filter = this.marketCodeParams;
+          const imageParts = this.marketCodeParams.split("-");
+          const imageResult = imageParts[0].toLowerCase();
+          this.previewImage = `https://static.bitlo.com/cryptologossvg/${imageResult}.svg`;
+        }
+
+        this.findPositiveChanges(this.marketDatas);
+        this.findMostIncreasedMarket(this.marketDatas);
+        this.findMostDecreasedMarket(this.marketDatas);
+        this.countMarketsAbove10000TRY(this.marketDatas);
+        this.countMarketsBelow1TRY(this.marketDatas);
+        this.calculateAveragePrice(this.marketDatas);
+        this.calculateDolarPrice();
+
+        this.loader = false;
       }
-
-      this.findPositiveChanges(this.marketDatas);
-      this.findMostIncreasedMarket(this.marketDatas);
-      this.findMostDecreasedMarket(this.marketDatas);
-      this.countMarketsAbove10000TRY(this.marketDatas);
-      this.countMarketsBelow1TRY(this.marketDatas);
-      this.calculateAveragePrice(this.marketDatas);
-      this.calculateDolarPrice();
-      this.loader = false;
-
-    }, err => {
-      console.log(err);
-    })
+    });
 
   }
+
 
   findPositiveChanges(marketDatas: MarketData[]) {
     this.positiveChanges = marketDatas.filter(marketData => {

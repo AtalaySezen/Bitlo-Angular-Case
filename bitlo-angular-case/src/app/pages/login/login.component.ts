@@ -21,9 +21,9 @@ export class LoginComponent {
     if (Object.keys(this.authService.tokenValue).length !== 0) {
       this.router.navigate(['/profil'])
     }
-     console.log(this.authService.checkToken);
+    console.log(this.authService.checkToken);
 
-    }
+  }
 
 
   ngOnInit(): void {
@@ -39,17 +39,22 @@ export class LoginComponent {
     let identifier = this.form.get('email')?.value;
     let password = this.form.get('password')?.value;
 
-    this.authService.Login(identifier, password).subscribe((data: authResponse) => {
-      if (data.message == 'Login success') {
-        this.userErrorMessage = false;
-        this.authService.SetStorageUser(data.token);
-        this.router.navigate(['/profil']);
-      }
-    },
-      err => {
+    this.authService.Login(identifier, password).subscribe({
+      next: (data: authResponse) => {
+        if (data.message === 'Login success') {
+          this.userErrorMessage = false;
+          this.authService.SetStorageUser(data.token);
+          this.router.navigate(['/profil']);
+        }
+      },
+      error: (err) => {
         this.userErrorMessage = true;
-        this.errorMessage = 'Kullanıcı adı ya da parola yanlış'
-      })
+        this.errorMessage = 'Kullanıcı adı ya da parola yanlış';
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
 
   }
 
