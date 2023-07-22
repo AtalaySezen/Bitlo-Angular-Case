@@ -1,6 +1,6 @@
 <ng-container *ngIf="withoutFilterParams">
     <div *ngFor="let item of listArray">
-        <ul>
+        <ul *ngIf="listArray.length > 1">
             <li *ngIf="item?.positiveChangeResult">{{item.positiveChangeResult}}</li>
             <li *ngIf="item?.mostIncreasedMarket">{{item.mostIncreasedMarket}}</li>
             <li *ngIf="item?.mostDecreasedMarket">{{item.mostDecreasedMarket}}</li>
@@ -15,14 +15,19 @@
                     dolarıdır</span>
             </li>
         </ul>
+
+        <ng-container *ngIf="listArray.length <= 1">
+            <span class="search-result">Aramanız ile eşleşen sonuç bulunamadı</span>
+        </ng-container>
     </div>
 </ng-container>
 
 <ng-container *ngIf="withFilterParams">
+    <h1>burası</h1>
     <div class="image-container">
         <img class="image" [src]="previewImage" alt="Bitlo">
     </div>
-    <ul *ngFor="let item of this.dataSource.filteredData">
+    <ul *ngFor="let item of this.dataSource.filteredData|slice:0:1">
         <li>
             {{marketCodeParams?.replace('-',' / ')}}
         </li>

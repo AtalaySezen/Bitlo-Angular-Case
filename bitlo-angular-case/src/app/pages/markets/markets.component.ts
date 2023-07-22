@@ -42,9 +42,18 @@ export class MarketsComponent {
   }
 
   getMarketUserParams() {
+    this.previewImage = '';
     this.activatedRoute.paramMap.subscribe(params => {
       this.marketCodeParams = params.get('marketCode');
+
+      if (this.marketCodeParams != null) {
+        const imageParts = this.marketCodeParams!.split("-");
+        const imageResult = imageParts[0].toLowerCase();
+        this.previewImage = `https://static.bitlo.com/cryptologossvg/${imageResult}.svg`;
+      }
+
     });
+
   }
 
   getMarketsData() {
@@ -82,124 +91,155 @@ export class MarketsComponent {
 
   }
 
-
   findPositiveChanges(marketDatas: MarketData[]) {
-    this.positiveChanges = marketDatas.filter(marketData => {
-      const changePercent = parseFloat(marketData.change24hPercent);
-      return !isNaN(changePercent) && changePercent > 0;
-    });
+    try {
+      this.positiveChanges = marketDatas.filter(marketData => {
+        const changePercent = parseFloat(marketData.change24hPercent);
+        return !isNaN(changePercent) && changePercent > 0;
+      });
 
-    this.positiveChangeResult = `Bugün ${this.positiveChanges.length} adet marketin fiyat değişim yüzdesi pozitif olmuştur.`;
-    this.listArray.push({ 'positiveChangeResult': this.positiveChangeResult });
-
+      if (this.positiveChanges.length != 0) {
+        this.positiveChangeResult = `Bugün ${this.positiveChanges.length} adet marketin fiyat değişim yüzdesi pozitif olmuştur.`;
+        this.listArray.push({ 'positiveChangeResult': this.positiveChangeResult });
+      }
+    } catch (error) {
+      console.error("Hata oluştu:", error);
+    }
   }
 
 
   findMostIncreasedMarket(marketDatas: MarketData[]) {
-    let maxChangePercent = -Infinity;
-    let mostIncreasedMarketValue: MarketData | null = null;
-
-    for (const marketData of marketDatas) {
-      const changePercent = Number(marketData.change24hPercent);
-      if (changePercent > maxChangePercent) {
-        maxChangePercent = changePercent;
-        mostIncreasedMarketValue = marketData;
+    try {
+      let maxChangePercent = -Infinity;
+      let mostIncreasedMarketValue: MarketData | null = null;
+      for (const marketData of marketDatas) {
+        const changePercent = Number(marketData.change24hPercent);
+        if (changePercent > maxChangePercent) {
+          maxChangePercent = changePercent;
+          mostIncreasedMarketValue = marketData;
+        }
       }
+
+      if (this.mostIncreasedMarket != null) {
+        this.mostIncreasedMarket = `Bugün en fazla artış gösteren ${mostIncreasedMarketValue?.change24hPercent} market ${mostIncreasedMarketValue?.marketCode} marketi olmuştur.`;
+        this.listArray.push({ 'mostIncreasedMarket': this.mostIncreasedMarket });
+      }
+
+    } catch (error) {
+      console.error("Hata oluştu:", error);
     }
-
-    this.mostIncreasedMarket = `Bugün en fazla artış gösteren ${mostIncreasedMarketValue?.change24hPercent} market ${mostIncreasedMarketValue?.marketCode} marketi olmuştur.`
-    this.listArray.push({ 'mostIncreasedMarket': this.mostIncreasedMarket });
-
   }
 
   findMostDecreasedMarket(marketDatas: MarketData[]) {
-    let mostDecreasedMarketValue = null;
-    let minChangePercent = Infinity;
+    try {
+      let mostDecreasedMarketValue = null;
+      let minChangePercent = Infinity;
 
-    for (const marketData of marketDatas) {
-      const changePercent = Number(marketData.change24hPercent);
-      if (changePercent < minChangePercent) {
-        minChangePercent = changePercent;
-        mostDecreasedMarketValue = marketData;
+      for (const marketData of marketDatas) {
+        const changePercent = Number(marketData.change24hPercent);
+        if (changePercent < minChangePercent) {
+          minChangePercent = changePercent;
+          mostDecreasedMarketValue = marketData;
+        }
       }
+
+      if (mostDecreasedMarketValue != null) {
+        this.mostDecreasedMarket = `Bugün en fazla değer kaybeden ${mostDecreasedMarketValue?.change24hPercent} market ${mostDecreasedMarketValue?.marketCode} marketi olmuştur`;
+        this.listArray.push({ 'mostDecreasedMarket': this.mostDecreasedMarket });
+      }
+
+    } catch (error) {
+      console.error("Hata oluştu:", error);
     }
-
-    this.mostDecreasedMarket = `Bugün en fazla değer kaybeden ${mostDecreasedMarketValue?.change24hPercent} market ${mostDecreasedMarketValue?.marketCode} marketi olmuştur`
-    this.listArray.push({ 'mostDecreasedMarket': this.mostDecreasedMarket });
-
   }
 
   countMarketsAbove10000TRY(marketDatas: MarketData[]) {
-    let count = 0;
-    const thresholdPrice = 10000;
+    try {
+      let count = 0;
+      const thresholdPrice = 10000;
 
-    for (const marketData of marketDatas) {
-      const currentQuote = Number(marketData.currentQuote);
-      if (currentQuote > thresholdPrice) {
-        count++;
+      for (const marketData of marketDatas) {
+        const currentQuote = Number(marketData.currentQuote);
+        if (currentQuote > thresholdPrice) {
+          count++;
+        }
       }
+      if (count != 0) {
+        this.numberOfMarketsAbove10000 = `Fiyatı (currentQuote) 10,000 TRY üzerinde olan toplam ${count} adet market vardır.`;
+        this.listArray.push({ 'numberOfMarketsAbove10000': this.numberOfMarketsAbove10000 });
+      }
+    } catch (error) {
+      console.error("Hata oluştu:", error);
     }
-
-    this.numberOfMarketsAbove10000 = `Fiyatı (currentQuote) 10,000 TRY üzerinde olan toplam ${count} adet market vardır.`
-    this.listArray.push({ 'numberOfMarketsAbove10000': this.numberOfMarketsAbove10000 });
   }
 
-
   countMarketsBelow1TRY(marketDatas: MarketData[]) {
-    let count = 0;
-    const thresholdPrice = 1.00;
+    try {
+      let count = 0;
+      const thresholdPrice = 1.00;
 
-    for (const marketData of marketDatas) {
-      const currentQuote = Number(marketData.currentQuote);
-      if (currentQuote < thresholdPrice) {
-        count++;
+      for (const marketData of marketDatas) {
+        const currentQuote = Number(marketData.currentQuote);
+        if (currentQuote < thresholdPrice) {
+          count++;
+        }
       }
+
+      if (count != 0) {
+        this.numberOfMarketsUnder1TRY = `Fiyatı (currentQuote) 1.00 TRY’den daha az olan toplam ${count} adet market vardır.`;
+        this.listArray.push({ 'numberOfMarketsUnder1TRY': this.numberOfMarketsUnder1TRY });
+      }
+
+    } catch (error) {
+      console.error("Hata oluştu:", error);
     }
-
-    this.numberOfMarketsUnder1TRY = `Fiyatı (currentQuote) 1.00 TRY’den daha az olan toplam ${count} adet market vardır.`
-    this.listArray.push({ 'numberOfMarketsUnder1TRY': this.numberOfMarketsUnder1TRY });
-
   }
 
   calculateAveragePrice(marketDatas: any[]) {
-    const totalPrices = marketDatas.reduce((acc, marketData) => {
-      const currentQuote = Number(marketData.currentQuote);
-      return acc + currentQuote;
-    }, 0);
+    try {
+      const totalPrices = marketDatas.reduce((acc, marketData) => {
+        const currentQuote = Number(marketData.currentQuote);
+        return acc + currentQuote;
+      }, 0);
 
-    const marketCount = this.marketDatas.length;
+      const marketCount = marketDatas.length;
 
-    if (marketCount === 0) {
+      if (marketCount === 0) {
+        return false;
+      } else {
+        this.averagePrice = `${totalPrices / marketCount}`;
+        this.listArray.push({ 'averagePrice': this.averagePrice });
+        return true;
+      }
+    } catch (error) {
+      console.error("Hata oluştu:", error);
       return false;
-    } else {
-      this.averagePrice = `${totalPrices / marketCount}`;
-      this.listArray.push({ 'averagePrice': this.averagePrice });
-
-      return true;
     }
   }
 
 
   calculateDolarPrice() {
-    const btcTryPrice = this.marketDatas.find(marketData => marketData.marketCode === 'BTC-TRY')?.currentQuote;
-    const usdtTryPrice = this.marketDatas.find(marketData => marketData.marketCode === 'USDT-TRY')?.currentQuote;
-    const btcTryPriceValue = Number(btcTryPrice || '1');
-    const usdtTryPriceValue = Number(usdtTryPrice || '1');
+    try {
+      const btcTryPrice = this.marketDatas.find(marketData => marketData.marketCode === 'BTC-TRY')?.currentQuote;
+      const usdtTryPrice = this.marketDatas.find(marketData => marketData.marketCode === 'USDT-TRY')?.currentQuote;
+      const btcTryPriceValue = Number(btcTryPrice || '1');
+      const usdtTryPriceValue = Number(usdtTryPrice || '1');
 
-    this.btcToDolarResult = btcTryPriceValue / usdtTryPriceValue;
-    this.listArray.push({ 'btcToDolarResult': this.btcToDolarResult });
-
+      this.btcToDolarResult = btcTryPriceValue / usdtTryPriceValue;
+      this.listArray.push({ 'btcToDolarResult': this.btcToDolarResult });
+    } catch (error) {
+      console.error("Hata oluştu:", error);
+    }
   }
 
 
   applyFilter(event: Event) {
+    this.dataSource.filteredData = [];
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim();
     this.listArray = [];
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-
       this.findPositiveChanges(this.dataSource.filteredData);
       this.findMostIncreasedMarket(this.dataSource.filteredData);
       this.findMostDecreasedMarket(this.dataSource.filteredData);
@@ -211,8 +251,10 @@ export class MarketsComponent {
   }
 
   goMarketDetail(marketCode: string) {
+    this.getMarketUserParams();
     this.authService.Router(['/marketler', marketCode])
   }
+
 
 
 

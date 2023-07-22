@@ -4,7 +4,7 @@
     <div *ngIf="!loader" class="search-area">
         <div class="search-content">
             <div>
-                <h2 class="table-header">Marketler</h2>
+                <a routerLink="/marketler" class="table-header">Marketler</a>
             </div>
             <input (keyup)="applyFilter($event)" [(ngModel)]="input" class="search-input" type="search">
         </div>
@@ -83,7 +83,7 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
         </div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of datas" class="sticky left-0">
+        <mat-paginator [pageSizeOptions]="[5, 7,10]" aria-label="Select page of datas" class="sticky left-0">
         </mat-paginator>
     </div>
 

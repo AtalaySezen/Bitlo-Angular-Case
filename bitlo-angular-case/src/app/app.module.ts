@@ -11,9 +11,11 @@ import { MarketsComponent } from './pages/markets/markets.component';
 import { BalanceComponent } from './pages/balance/balance.component';
 import { OpentransactionsComponent } from './pages/opentransactions/opentransactions.component';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { ListComponent } from './components/list/list.component';
+import { LoaderComponent } from './components/loader/loader.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { LoaderComponent } from './components/loader/loader.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -27,7 +29,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ListComponent } from './components/list/list.component';
 
 @NgModule({
   declarations: [
