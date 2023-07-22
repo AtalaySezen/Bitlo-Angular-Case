@@ -11,7 +11,6 @@ export class ErrorHandlerService {
 
   handleError(error: any): void {
     const errorMessage = error?.error?.message;
-    console.log(error);
     console.error("Bir Hata Oluştu:", errorMessage || error);
     if (location.pathname != '/login') {
       this.snackbarService.openSnackBar(errorMessage || error);

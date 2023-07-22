@@ -30,7 +30,6 @@ export class BalanceComponent {
     this.loader = true;
     this.balanceService.GetBalanceInformation().subscribe({
       next: (data: any) => {
-        console.log(data.balances);
         this.balanceData.data = data.balances;
         this.withoutFilterBalanceData = data.balances;
         this.balanceData.sort = this.sort;

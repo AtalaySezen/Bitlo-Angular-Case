@@ -10,16 +10,14 @@ import { LogoutComponent } from './pages/logout/logout.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: '', component: HomeComponent, title: 'Anasayfa' },
+  { path: 'login', component: LoginComponent, title: 'Giriş Yap' },
   { path: 'marketler', component: MarketsComponent, title: 'Marketler' },
-  { path: 'marketler/:marketCode', component: MarketsComponent, title: 'Marketler' },
+  { path: 'marketler/:marketCode', component: MarketsComponent, title: 'Market Detay' },
   { path: 'profil', component: ProfileComponent, title: 'Profil' },
-
-  //Auth ile erişimi olanlar:
   { path: 'profil/bakiyeler', component: BalanceComponent, canActivate: [AuthGuard], title: 'Bakiyeler' },
   { path: 'profil/acik-emirler', component: OpentransactionsComponent, canActivate: [AuthGuard], title: 'Açık Emirler' },
-  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard], title: 'Logout' },
+  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard], title: 'Çıkış' },
   { path: '**', redirectTo: '' },
 
 ];
