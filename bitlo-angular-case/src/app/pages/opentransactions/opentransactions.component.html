@@ -1,39 +1,38 @@
 <app-header></app-header>
 <app-loader [diameter]="100" *ngIf="loader"></app-loader>
-<section class="container-opentransactions" *ngIf="!loader">
+<section class="container-opentransactions" [class.none]="loader">
     <div class="table-container">
         <div class="content-table">
             <h2 class="table-header">Açık Emirler</h2>
         </div>
-        <table mat-table [dataSource]="openOrdersData" class="mat-elevation-z8">
+        <table mat-table [dataSource]="openOrdersData" class="mat-elevation-z8" matSort #firstSort="matSort">
             <ng-container matColumnDef="marketCode">
-                <th mat-header-cell *matHeaderCellDef> marketCode </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> marketCode </th>
                 <td mat-cell *matCellDef="let element"> {{element?.marketCode}} </td>
             </ng-container>
 
             <ng-container matColumnDef="orderSide">
-                <th mat-header-cell *matHeaderCellDef> orderSide </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> orderSide </th>
                 <td mat-cell *matCellDef="let element"> {{element?.orderSide}} </td>
             </ng-container>
 
             <ng-container matColumnDef="orderDate">
-                <th mat-header-cell *matHeaderCellDef> orderDate </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> orderDate </th>
                 <td mat-cell *matCellDef="let element"> {{element?.orderDate}} </td>
             </ng-container>
 
             <ng-container matColumnDef="price">
-                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
                 <td mat-cell *matCellDef="let element"> {{element?.price|number: '1.2-2'}} </td>
             </ng-container>
 
-
             <ng-container matColumnDef="orderAmount">
-                <th mat-header-cell *matHeaderCellDef> orderAmount </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> orderAmount </th>
                 <td mat-cell *matCellDef="let element"> {{element?.orderAmount|number: '1.2-2'}} </td>
             </ng-container>
 
             <ng-container matColumnDef="fillAmount">
-                <th mat-header-cell *matHeaderCellDef> fillAmount </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> fillAmount </th>
                 <td mat-cell *matCellDef="let element"> {{element?.fillAmount}} </td>
             </ng-container>
 

@@ -1,28 +1,32 @@
 <app-header></app-header>
 <app-loader [diameter]="100" *ngIf="loader"></app-loader>
-<section class="container-balance" *ngIf="!loader">
+<section class="container-balance" [class.none]="loader">
     <div class="content-balance">
-
         <section class="checkbox-section">
-            <mat-checkbox class="checkbox-margin" [(ngModel)]="hideLowBalances">Düşük Bakiyeleri Göster /
-                Gizle</mat-checkbox>
+            <mat-checkbox class="checkbox-margin" (click)="updateFilteredBalanceData()" [(ngModel)]="hideLowBalances">
+                <span class="checkbox-text">
+                    {{showHideLowBalance}}
+                </span>
+            </mat-checkbox>
+            <mat-icon class="eye-icon" aria-hidden="false" aria-label="Example home icon"
+                [fontIcon]="showHideBalanceIcon"></mat-icon>
         </section>
         <div class="table-container">
-            <table mat-table [dataSource]="balanceData" class="mat-elevation-z8">
+            <table mat-table [dataSource]="balanceData" class="mat-elevation-z8" matSort #firstSort="matSort">
                 <ng-container matColumnDef="assetCode">
-                    <th mat-header-cell *matHeaderCellDef> assetCode </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> assetCode </th>
                     <td mat-cell *matCellDef="let element"> {{element?.assetCode}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="availableAmount">
-                    <th mat-header-cell *matHeaderCellDef> availableAmount</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> availableAmount</th>
                     <td mat-cell *matCellDef="let element"> {{element?.availableAmount| number:'1.2-2'}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="availableAmountTRYValue">
-                    <th mat-header-cell *matHeaderCellDef> availableAmountTRYValue</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> availableAmountTRYValue</th>
                     <td mat-cell *matCellDef="let element">
-                        <ng-container *ngIf="shouldShowValue(element, 'availableAmountTRYValue'); else hideValue">
+                        <ng-container>
                             {{element?.availableAmountTRYValue | number:'1.2-2'}}
                         </ng-container>
                         <ng-template #hideValue>***</ng-template>

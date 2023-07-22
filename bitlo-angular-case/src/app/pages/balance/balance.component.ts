@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { balanceModel } from 'src/app/shared/models/balance.model';
 import { BalanceService } from 'src/app/shared/services/balance.service';
@@ -13,7 +14,10 @@ export class BalanceComponent {
   balanceData = new MatTableDataSource<balanceModel>();
   displayedColumns: string[] = ['assetCode', 'availableAmount', 'availableAmountTRYValue'];
   hideLowBalances: boolean = true;
-  filteredBalanceData = new MatTableDataSource<balanceModel>();
+  withoutFilterBalanceData: balanceModel[] = [];
+  showHideLowBalance: string = 'Düşük Bakiyeleri Göster';
+  showHideBalanceIcon: string = 'visibility_off';
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private balanceService: BalanceService) {
   }
@@ -26,36 +30,28 @@ export class BalanceComponent {
     this.loader = true;
     this.balanceService.GetBalanceInformation().subscribe({
       next: (data: any) => {
+        console.log(data.balances);
         this.balanceData.data = data.balances;
+        this.withoutFilterBalanceData = data.balances;
+        this.balanceData.sort = this.sort;
+        this.updateFilteredBalanceData();
+        this.loader = false;
+      },
+      error: () => {
         this.loader = false;
       }
     });
   }
 
-
   updateFilteredBalanceData() {
-    if (this.hideLowBalances) {
-      this.filteredBalanceData.data = this.balanceData.data.filter((element: any) => {
-        return element.availableAmount >= 1 && element.availableAmountTRYValue >= 1;
-      });
-    } else {
-      this.filteredBalanceData.data = this.balanceData.data.filter((element: any) => {
-        return true;
-      });
-    }
+    this.balanceData.data = this.hideLowBalances
+      ? this.balanceData.data.filter(item => item.availableAmount !== undefined && item.availableAmount >= 1)
+      : this.withoutFilterBalanceData;
+
+    this.showHideLowBalance = this.hideLowBalances ? 'Düşük Bakiyeleri Gizle' : 'Düşük Bakiyeleri Göster';
+    this.showHideBalanceIcon = this.hideLowBalances ? 'visibility_off' : 'visibility';
+
   }
-
-
-  shouldShowValue(element: any, column: string) {
-    if (column === 'availableAmount') {
-      return !(this.hideLowBalances && element[column] < 1);
-    } else if (column === 'availableAmountTRYValue') {
-      return !(this.hideLowBalances && element[column] < 1);
-    }
-
-    return true;
-  }
-
 
 
 
