@@ -1,4 +1,5 @@
 # BitloAngularCase
+Project Link : 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
 
@@ -12,7 +13,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
