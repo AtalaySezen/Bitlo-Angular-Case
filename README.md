@@ -1,6 +1,10 @@
 # BitloAngularCase
 Project Link : https://sparkly-muffin-1ecf8d.netlify.app/
 
+Login Informations
+Username:test@test.com
+password:123abc
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
 
 ## Development server
