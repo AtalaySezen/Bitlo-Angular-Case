@@ -20,8 +20,18 @@
     .content-table {
         padding: 1rem 0;
     }
-}
 
-.table-container table {
-    white-space: nowrap;
+    .table-container table {
+        white-space: nowrap;
+    }
+
+    .green-text {
+        color: green;
+        font-weight: 450;
+    }
+
+    .red-text {
+        color: red;
+        font-weight: 450;
+    }
 }

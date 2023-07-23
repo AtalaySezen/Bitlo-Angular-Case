@@ -4,41 +4,41 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
 
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    border: 2px solid #0a2363;
-    border-radius: 20px;
-    padding: 3rem;
-}
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        border: 2px solid #0a2363;
+        border-radius: 20px;
+        padding: 3rem;
+    }
 
-.home-content {
-    text-decoration: none;
-    color: black;
-    font-size: 1.2rem;
-    margin: 5px 0;
-    color: #0a2363;
-    font-weight: 500;
-}
-
-.icon-contents {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.container {
-    mat-icon {
+    .home-content {
+        text-decoration: none;
+        color: black;
+        font-size: 1.2rem;
+        margin: 5px 0;
         color: #0a2363;
+        font-weight: 500;
+    }
+
+    .icon-contents {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container {
+        mat-icon {
+            color: #0a2363;
+            font-size: 1.5rem;
+            margin-right: 5px;
+        }
+    }
+
+    .github-icon {
         font-size: 1.5rem;
         margin-right: 5px;
+        fill: #0a2363;
     }
-}
-
-.github-icon {
-    font-size: 1.5rem;
-    margin-right: 5px;
-    fill: #0a2363;
 }
