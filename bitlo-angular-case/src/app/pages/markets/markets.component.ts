@@ -16,7 +16,7 @@ import { SnackbarService } from 'src/app/components/snackbar/snackbar.service';
 
 export class MarketsComponent {
   loader: boolean = false;
-  input: string;
+  searchInput: string;
   dataSource = new MatTableDataSource<MarketData>();
   marketDatas: MarketData[];
   displayedColumns: string[] = ['index', 'marketCode', 'notionalVolume24h', 'volume24h', 'weightedAverage24h', 'lowestQuote24h', 'highestQuote24h', 'currentQuote', 'change24hPercent', 'change24h', 'bid', 'ask'];
@@ -103,7 +103,7 @@ export class MarketsComponent {
         this.positiveChangeResult = `Bugün ${this.positiveChanges.length} adet marketin fiyat değişim yüzdesi pozitif olmuştur.`;
         this.listArray.push({ 'positiveChangeResult': this.positiveChangeResult });
       }
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
@@ -121,13 +121,12 @@ export class MarketsComponent {
           mostIncreasedMarketValue = marketData;
         }
       }
-
-      if (this.mostIncreasedMarket != null) {
+      if (mostIncreasedMarketValue != null) {
         this.mostIncreasedMarket = `Bugün en fazla artış gösteren ${mostIncreasedMarketValue?.change24hPercent} market ${mostIncreasedMarketValue?.marketCode} marketi olmuştur.`;
         this.listArray.push({ 'mostIncreasedMarket': this.mostIncreasedMarket });
       }
 
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
@@ -151,7 +150,7 @@ export class MarketsComponent {
         this.listArray.push({ 'mostDecreasedMarket': this.mostDecreasedMarket });
       }
 
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
@@ -172,7 +171,7 @@ export class MarketsComponent {
         this.numberOfMarketsAbove10000 = `Fiyatı (currentQuote) 10,000 TRY üzerinde olan toplam ${count} adet market vardır.`;
         this.listArray.push({ 'numberOfMarketsAbove10000': this.numberOfMarketsAbove10000 });
       }
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
@@ -195,7 +194,7 @@ export class MarketsComponent {
         this.listArray.push({ 'numberOfMarketsUnder1TRY': this.numberOfMarketsUnder1TRY });
       }
 
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
@@ -217,7 +216,7 @@ export class MarketsComponent {
         this.listArray.push({ 'averagePrice': this.averagePrice });
         return true;
       }
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
       return false;
@@ -234,7 +233,7 @@ export class MarketsComponent {
 
       this.btcToDolarResult = btcTryPriceValue / usdtTryPriceValue;
       this.listArray.push({ 'btcToDolarResult': this.btcToDolarResult });
-    } catch (error: any) {
+    } catch (error) {
       this.snackbarService.openSnackBar(error);
       console.error("Hata oluştu:", error);
     }
@@ -246,6 +245,7 @@ export class MarketsComponent {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim();
     this.listArray = [];
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
       this.findPositiveChanges(this.dataSource.filteredData);
@@ -256,6 +256,7 @@ export class MarketsComponent {
       this.calculateAveragePrice(this.dataSource.filteredData);
       this.calculateDolarPrice();
     }
+
   }
 
   goMarketDetail(marketCode: string) {

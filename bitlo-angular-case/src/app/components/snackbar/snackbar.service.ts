@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SnackbarService {
   constructor(private snackBar: MatSnackBar) { }
 
-  public openSnackBar(message: string, snackType?: any, action?: string) {
+  public openSnackBar(message: string|any, snackType?: any, action?: string) {
     const _snackType: any =
       snackType !== undefined ? snackType : 'Success';
     this.snackBar.open(message, action, {

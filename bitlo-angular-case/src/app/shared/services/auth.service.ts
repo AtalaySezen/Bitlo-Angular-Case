@@ -26,7 +26,7 @@ export class AuthService {
     );
   }
 
-  SetStorageUser(token: any) {
+  SetStorageUser(token: string) {
     return localStorage.setItem(`${this.authLocalStorageToken}`, JSON.stringify(token));
   }
 

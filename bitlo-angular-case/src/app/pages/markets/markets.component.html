@@ -6,7 +6,7 @@
             <div>
                 <a routerLink="/marketler" class="table-header">Marketler</a>
             </div>
-            <input (keyup)="applyFilter($event)" [(ngModel)]="input" class="search-input" type="search">
+            <input (keyup)="applyFilter($event)" [(ngModel)]="searchInput" class="search-input" type="search">
         </div>
     </div>
     <div class="container-table" [class.none]="loader">
@@ -76,7 +76,7 @@
                 </ng-container>
                 <tr class="mat-row" *matNoDataRow>
                     <td class="mat-cell" colspan="4" translate><span class="search-result" translate>
-                            <span>"{{input}}"</span>
+                            <span>"{{searchInput}}"</span>
                             Aramanız ile eşleşen sonuç bulunamadı</span></td>
                 </tr>
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -13,7 +13,10 @@
 
             <ng-container matColumnDef="orderSide">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> orderSide </th>
-                <td mat-cell *matCellDef="let element"> {{element?.orderSide}} </td>
+                <td mat-cell *matCellDef="let element"
+                    [ngClass]="element?.orderSide === 'BUY' ? 'green-text' : 'red-text'">
+                    {{ element?.orderSide }}
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="orderDate">

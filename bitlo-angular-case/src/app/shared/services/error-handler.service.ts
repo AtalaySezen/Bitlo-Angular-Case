@@ -12,7 +12,7 @@ export class ErrorHandlerService {
   handleError(error: any): void {
     const errorMessage = error?.error?.message;
     console.error("Bir Hata Oluştu:", errorMessage || error);
-    if (location.pathname != '/login') {
+    if (location.pathname != '/login' && location.pathname != '/profil') {
       this.snackbarService.openSnackBar(errorMessage || error);
     }
   }

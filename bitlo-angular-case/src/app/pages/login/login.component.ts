@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { authResponse } from 'src/app/shared/models/authResponse.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +15,16 @@ export class LoginComponent {
   userErrorMessage: boolean = false;
   errorMessage: string;
 
-  constructor(private router: Router, private authService: AuthService, private formBuilder: FormBuilder, private profileService: ProfileService) {
+  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
     this.checkUserLogged();
   }
 
 
   ngOnInit(): void {
+    this.createForm();
+  }
+
+  createForm() {
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
@@ -33,7 +35,6 @@ export class LoginComponent {
     if (this.authService.checkToken == true) {
       this.authService.Router(['/profil']);
     }
-
   }
 
   userLogin() {
@@ -45,7 +46,9 @@ export class LoginComponent {
       next: (data: authResponse) => {
         if (data.message === 'Login success') {
           this.userErrorMessage = false;
-          this.authService.SetStorageUser(data.token);
+          if (data.token != undefined) {
+            this.authService.SetStorageUser(data.token);
+          }
           this.authService.Router(['/profil']);
         }
       },

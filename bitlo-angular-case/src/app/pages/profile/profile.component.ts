@@ -16,11 +16,15 @@ export class ProfileComponent {
   displayedColumns: string[] = ['createdBy', 'from', 'to'];
 
   constructor(private profileService: ProfileService, private authService: AuthService) {
-    this.checkUserLogged = this.authService.checkToken;
+    this.checkToken();
   }
 
   ngOnInit() {
     this.getProfileData();
+  }
+
+  checkToken() {
+    this.checkUserLogged = this.authService.checkToken;
   }
 
 
