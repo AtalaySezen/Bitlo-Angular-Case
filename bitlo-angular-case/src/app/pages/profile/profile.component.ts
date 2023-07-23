@@ -10,10 +10,10 @@ import { ProfileService } from 'src/app/shared/services/profile.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  profileData: {};
+  displayedColumns: string[] = ['createdBy', 'from', 'to'];
   loader: boolean = false;
   checkUserLogged: boolean = false;
-  displayedColumns: string[] = ['createdBy', 'from', 'to'];
+  profileData: {};
 
   constructor(private profileService: ProfileService, private authService: AuthService) {
     this.checkToken();

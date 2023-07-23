@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MarketService } from 'src/app/shared/services/market.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MarketData } from 'src/app/shared/models/markets.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SnackbarService } from 'src/app/components/snackbar/snackbar.service';
@@ -15,11 +15,12 @@ import { SnackbarService } from 'src/app/components/snackbar/snackbar.service';
 })
 
 export class MarketsComponent {
-  loader: boolean = false;
-  searchInput: string;
   dataSource = new MatTableDataSource<MarketData>();
   marketDatas: MarketData[];
   displayedColumns: string[] = ['index', 'marketCode', 'notionalVolume24h', 'volume24h', 'weightedAverage24h', 'lowestQuote24h', 'highestQuote24h', 'currentQuote', 'change24hPercent', 'change24h', 'bid', 'ask'];
+  positiveChanges: MarketData[];
+  listArray: any[] = [];
+  searchInput: string;
   positiveChangeResult: string;
   mostIncreasedMarket: string;
   mostDecreasedMarket: string;
@@ -29,8 +30,7 @@ export class MarketsComponent {
   btcToDolarResult: number;
   marketCodeParams: string | null;
   previewImage: string = '';
-  positiveChanges: MarketData[];
-  listArray: any[] = [];
+  loader: boolean = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 

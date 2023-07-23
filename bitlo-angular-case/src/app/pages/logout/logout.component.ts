@@ -7,12 +7,15 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./logout.component.scss']
 })
 export class LogoutComponent {
+
   constructor(private authService: AuthService) {
     this.logOut();
   }
 
+
   logOut() {
     this.authService.Logout();
   }
+  
 
 }

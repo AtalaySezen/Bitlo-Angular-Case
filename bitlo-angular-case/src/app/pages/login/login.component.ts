@@ -9,11 +9,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  hide: boolean = true;
   form!: FormGroup;
+  errorMessage: string;
+  hide: boolean = true;
   loading: boolean = false;
   userErrorMessage: boolean = false;
-  errorMessage: string;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {
     this.checkUserLogged();

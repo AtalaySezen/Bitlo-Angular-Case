@@ -10,9 +10,9 @@ import { OpenordersService } from 'src/app/shared/services/openorders.service';
   styleUrls: ['./opentransactions.component.scss']
 })
 export class OpentransactionsComponent {
-  loader: boolean = false;
-  openOrdersData = new MatTableDataSource<ApiResponse>();
   displayedColumns: string[] = ['marketCode', 'orderSide', 'orderDate', 'price', 'orderAmount', 'fillAmount', 'fillPercent'];
+  openOrdersData = new MatTableDataSource<ApiResponse>();
+  loader: boolean = false;
   @ViewChild(MatSort) sort: MatSort;
 
 

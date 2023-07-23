@@ -10,17 +10,17 @@ import { BalanceService } from 'src/app/shared/services/balance.service';
   styleUrls: ['./balance.component.scss']
 })
 export class BalanceComponent {
-  loader: boolean = false;
   balanceData = new MatTableDataSource<balanceModel>();
-  displayedColumns: string[] = ['assetCode', 'availableAmount', 'availableAmountTRYValue'];
-  hideLowBalances: boolean = true;
   withoutFilterBalanceData: balanceModel[] = [];
+  displayedColumns: string[] = ['assetCode', 'availableAmount', 'availableAmountTRYValue'];
   showHideLowBalance: string = 'Düşük Bakiyeleri Göster';
   showHideBalanceIcon: string = 'visibility_off';
+  loader: boolean = false;
+  hideLowBalances: boolean = true;
   @ViewChild(MatSort) sort: MatSort;
+  
+  constructor(private balanceService: BalanceService) {}
 
-  constructor(private balanceService: BalanceService) {
-  }
 
   ngOnInit() {
     this.getBalanceData();
@@ -49,7 +49,6 @@ export class BalanceComponent {
 
     this.showHideLowBalance = this.hideLowBalances ? 'Düşük Bakiyeleri Gizle' : 'Düşük Bakiyeleri Göster';
     this.showHideBalanceIcon = this.hideLowBalances ? 'visibility_off' : 'visibility';
-
   }
 
 

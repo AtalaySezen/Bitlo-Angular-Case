@@ -30,6 +30,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     FormsModule,
     MatPaginatorModule,
     MatToolbarModule,
+    MatMenuModule,
     LoaderComponent,
     SnackbarComponent,
     MatFormFieldModule,
