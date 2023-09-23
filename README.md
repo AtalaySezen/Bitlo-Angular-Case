@@ -1,5 +1,5 @@
 # BitloAngularCase
-Project Link : https://sparkly-muffin-1ecf8d.netlify.app/
+Project Link : https://650eb93d0c4ca416432d6ce6--peppy-marshmallow-779e95.netlify.app/
 
 Login Informations
 <br>
