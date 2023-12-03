@@ -1,6 +1,5 @@
 # BitloAngularCase
-Project Link : https://650eb93d0c4ca416432d6ce6--peppy-marshmallow-779e95.netlify.app/
-
+Project Link : https://storied-pie-2b69c7.netlify.app/login
 Login Informations
 <br>
 Username:test@test.com
