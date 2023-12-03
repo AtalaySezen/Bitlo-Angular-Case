@@ -1,5 +1,5 @@
 # BitloAngularCase
-Project Link : https://storied-pie-2b69c7.netlify.app/login
+Project Link : https://storied-pie-2b69c7.netlify.app/
 Login Informations
 <br>
 Username:test@test.com
