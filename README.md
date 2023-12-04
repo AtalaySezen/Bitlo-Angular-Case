@@ -1,5 +1,6 @@
 # BitloAngularCase
-Project Link : https://sage-stardust-6a5214.netlify.app/
+Project Link : https://656e42ac8cfecc2363b7187a--peaceful-alpaca-3a307a.netlify.app/
+<br>
 Login Informations
 <br>
 Username:test@test.com
